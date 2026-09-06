@@ -6,7 +6,7 @@ REVIEWER: none
 
 > Este plan se despacha con el flujo CodeJob. Ver skill: agents-workflow.
 
-# Plan — `tinywasm/base64`: alfabeto configurable
+# Plan — `webtyp/base64`: alfabeto configurable
 
 ## Contexto
 
@@ -14,7 +14,7 @@ Este paquete existe **por tamaño**, no por compatibilidad: `encoding/base64`
 funciona con TinyGo, pero arrastra mucho más de lo que la tarea necesita. Hoy
 expone dos variantes fijas de RFC 4648 (`Encode`/`Decode` y
 `URLEncode`/`URLDecode`) y **no tiene ninguna dependencia** — ni de la stdlib ni
-de `tinywasm/*`. Eso se conserva.
+de `webtyp/*`. Eso se conserva.
 
 Hace falta una tercera forma: **alfabeto propio y sin relleno**. La pide bcrypt,
 que codifica sal y hash con `./ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`
@@ -59,7 +59,7 @@ es un añadido, no una ruptura.
 ## Errores
 
 Sin literales sueltos. Constantes exportadas, y el paquete sigue **sin importar
-nada** — ni `tinywasm/fmt`. Declara un tipo de error propio:
+nada** — ni `webtyp/fmt`. Declara un tipo de error propio:
 
 ```go
 type Error string
@@ -76,7 +76,7 @@ const (
 ```
 
 **Anti-footgun:** este paquete presume de cero dependencias y el README lo
-declara. Importar `tinywasm/fmt` para construir un error rompería esa promesa por
+declara. Importar `webtyp/fmt` para construir un error rompería esa promesa por
 comodidad. `type Error string` cuesta cero bytes de dependencia.
 
 ## Tests

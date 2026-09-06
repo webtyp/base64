@@ -10,7 +10,7 @@ package base64
 // invalidError is the package's only error. It is a bare type rather than
 // fmt.Err/errors.New on purpose: this package must import NOTHING.
 //
-// Measured under TinyGo (wasm target), pulling in tinywasm/fmt just to build one
+// Measured under TinyGo (wasm target), pulling in webtyp/fmt just to build one
 // error value costs ~74 KB — four times more than the whole encoding/base64 this
 // package exists to avoid. A zero-import package is what makes it pay off.
 type invalidError struct{}

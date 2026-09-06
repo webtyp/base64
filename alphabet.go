@@ -1,7 +1,7 @@
 package base64
 
 // Error es un error de base64 sin dependencias. El paquete presume de cero
-// imports (ver README: importar tinywasm/fmt cuesta 74 KB en TinyGo) y por
+// imports (ver README: importar webtyp/fmt cuesta 74 KB en TinyGo) y por
 // eso no usa fmt.Errorf ni errors.New.
 type Error string
 

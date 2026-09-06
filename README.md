@@ -1,7 +1,7 @@
 # base64
 <img src="docs/img/badges.svg">
 
-Códec base64 (RFC 4648) con **cero dependencias** — ni stdlib ni `tinywasm/*` —
+Códec base64 (RFC 4648) con **cero dependencias** — ni stdlib ni `webtyp/*` —
 pensado para binarios WASM del edge (Cloudflare Workers, `goflare`) compilados
 con TinyGo.
 
@@ -18,12 +18,12 @@ y decodifica una cadena:
 | Implementación | Binario `.wasm` |
 |---|---|
 | `encoding/base64` | 154 115 bytes |
-| `tinywasm/base64` | 122 967 bytes |
+| `webtyp/base64` | 122 967 bytes |
 | **ahorro** | **31 148 bytes (20 %)** |
 
 ### La regla que hay detrás: cero imports o no compensa
 
-La primera versión de este paquete importaba `tinywasm/fmt` solo para declarar su
+La primera versión de este paquete importaba `webtyp/fmt` solo para declarar su
 error. El resultado fue **74 KB más grande que el stdlib**: la dependencia costaba
 cuatro veces más que todo lo que el códec ahorraba.
 
@@ -87,7 +87,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/tinywasm/base64"
+	"webtyp.com/base64"
 )
 
 func main() {
@@ -134,14 +134,14 @@ func Example_bcrypt() {
 - **Solo canónico** (RFC 4648 §3.5): los bits sobrantes del último grupo deben ser
   cero. Sin esta comprobación, `"Zg"` y `"Zh"` decodifican ambos a `"f"` — varias
   grafías para los mismos bytes, es decir, malleabilidad. Lo destapó la auditoría
-  de seguridad de [`tinywasm/jwt`](https://github.com/tinywasm/jwt/blob/main/docs/SECURITY_AUDIT.md)
+  de seguridad de [`webtyp/jwt`](https://github.com/webtyp/jwt/blob/main/docs/SECURITY_AUDIT.md)
   (hallazgo I-1).
 - **Sin `map`**: la tabla de decodificación es un `[256]byte`.
 
 ## Tests
 
 ```bash
-go install github.com/tinywasm/devflow/cmd/gotest@latest
+go install webtyp.com/devflow/cmd/gotest@latest
 gotest           # nativo + wasm (compilador de Go)
 gotest -tinygo   # suite WASM compilada con TinyGo real
 ```
